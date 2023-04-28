@@ -7,7 +7,11 @@ export class LoginService {
     private users = [
         {
             username: 'testuser',
-            password: 'ilovechatmap'
+            password: 'password'
+        },
+        {
+            username: 'spaghetti',
+            password: 'meatballs'
         }
     ];
 
