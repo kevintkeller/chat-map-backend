@@ -2,8 +2,10 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { LoginModule } from './login/login.module';
 import { ConfigModule } from '@nestjs/config';
+import { UserModule } from './user/user.module';
+import { UserEntity } from './user/models/user.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,12 +16,13 @@ import { ConfigModule } from '@nestjs/config';
       port: 3306,
       username: 'CS355G3',
       password: 'SGL5TPQV',
-      database: '',
-      entities: [],
+      database: 'cs355g3',
+      entities: [UserEntity],
       synchronize: true,
   }),
-    LoginModule,
-    ConfigModule.forRoot({isGlobal: true})
+    ConfigModule.forRoot({isGlobal: true}),
+    UserModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
