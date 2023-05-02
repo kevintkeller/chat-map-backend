@@ -1,4 +1,43 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Post } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { PostEntity } from '../models/post.entity';
+import { Repository } from 'typeorm';
+import { UserPost } from '../models/post.interface';
+import { Observable, map, switchMap, catchError, throwError, from } from 'rxjs';
 
 @Injectable()
-export class PostService {}
+export class PostService {
+
+    constructor(
+        @InjectRepository(PostEntity) private readonly postRepository: Repository<PostEntity>,
+    ){}
+
+    // needs to be implemented
+    create(post: UserPost): Observable<void | UserPost> {
+        //return;
+        //switchMap(() => {
+            const newPost = new PostEntity();
+            newPost.title = post.title;
+            newPost.content = post.content;
+            newPost.latitude = post.latitude;
+            newPost.longitude = post.longitude;
+            
+            return from(this.postRepository.save(newPost)).pipe(
+                map((post: PostEntity) => {
+                    const {...result} = post;
+                    return;
+                }),
+                catchError(err => throwError(err))
+            )
+        //})
+        
+        
+
+    }
+
+    // this one is done
+    deleteOne(postId: number): Observable<any> {
+        return from(this.postRepository.delete(postId));
+    }
+
+}
