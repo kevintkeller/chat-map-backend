@@ -6,6 +6,8 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { UserEntity } from './user/models/user.entity';
 import { AuthModule } from './auth/auth.module';
+import { PostModule } from './post/post.module';
+import { PostEntity } from './post/models/post.entity';
 
 @Module({
   imports: [
@@ -17,12 +19,13 @@ import { AuthModule } from './auth/auth.module';
       username: 'CS355G3',
       password: 'SGL5TPQV',
       database: 'cs355g3',
-      entities: [UserEntity],
+      entities: [UserEntity, PostEntity],
       synchronize: true,
   }),
     ConfigModule.forRoot({isGlobal: true}),
     UserModule,
-    AuthModule
+    AuthModule,
+    PostModule
   ],
   controllers: [AppController],
   providers: [AppService],
