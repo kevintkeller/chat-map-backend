@@ -11,7 +11,7 @@ export class PostEntity {
     // THIS MIGHT NOT BE RIGHT
     @ManyToOne(type => UserEntity, userEntity => userEntity.id)
     // might not need to be array
-    userId: UserEntity;
+    userEntity: number;
     
     // title
     @Column()

@@ -12,27 +12,22 @@ export class PostService {
         @InjectRepository(PostEntity) private readonly postRepository: Repository<PostEntity>,
     ){}
 
-    // needs to be implemented
     create(post: UserPost): Observable<void | UserPost> {
-        //return;
-        //switchMap(() => {
-            const newPost = new PostEntity();
-            newPost.title = post.title;
-            newPost.content = post.content;
-            newPost.latitude = post.latitude;
-            newPost.longitude = post.longitude;
-            
-            return from(this.postRepository.save(newPost)).pipe(
-                map((post: PostEntity) => {
-                    const {...result} = post;
-                    return;
-                }),
-                catchError(err => throwError(err))
-            )
-        //})
-        
-        
 
+        const newPost = new PostEntity();
+        newPost.title = post.title;
+        newPost.content = post.content;
+        newPost.latitude = post.latitude;
+        newPost.longitude = post.longitude;
+        newPost.userEntity = post.userId;
+        
+        return from(this.postRepository.save(newPost)).pipe(
+            map((post: PostEntity) => {
+                const {...result} = post;
+                return;
+            }),
+            catchError(err => throwError(err))
+        )
     }
 
     // this one is done
