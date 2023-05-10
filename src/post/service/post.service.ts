@@ -17,8 +17,8 @@ export class PostService {
         const newPost = new PostEntity();
         newPost.title = post.title;
         newPost.content = post.content;
-        newPost.latitude = post.latitude;
-        newPost.longitude = post.longitude;
+        newPost.latitude = Number(post.latitude);
+        newPost.longitude = Number(post.longitude);
         newPost.userEntity = post.userId;
         
         return from(this.postRepository.save(newPost)).pipe(
