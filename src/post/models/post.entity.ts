@@ -1,5 +1,5 @@
 import { UserEntity } from "src/user/models/user.entity";
-import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Double, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity()
 export class PostEntity {
@@ -22,10 +22,10 @@ export class PostEntity {
     content: string
         
     // latitude
-    @Column()
-    latitude: number;
+    @Column({type: 'decimal', precision: 10, scale: 5, default: 0.0})
+    latitude: Double;
 
     // longitude
-    @Column()
-    longitude: number;
+    @Column({type: 'decimal', precision: 10, scale: 5, default: 0.0})
+    longitude: Double;
 }
