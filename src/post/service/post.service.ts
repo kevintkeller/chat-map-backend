@@ -35,4 +35,12 @@ export class PostService {
         return from(this.postRepository.delete(postId));
     }
 
+    findAll(): Observable<PostEntity[]> {
+        return from(this.postRepository.find()).pipe(
+            map((posts) => {
+                return posts;
+            })
+        );
+    }
+
 }
