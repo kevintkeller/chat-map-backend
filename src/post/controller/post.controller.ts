@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { PostService } from '../service/post.service';
 import { UserPost } from '../models/post.interface';
 import { Observable, catchError, map, of } from 'rxjs';
+import { PostEntity } from '../models/post.entity';
 
 @Controller('post')
 export class PostController {
@@ -15,6 +16,11 @@ export class PostController {
             map((post: UserPost) => post),
             catchError(err => of({error: err.message}))
         );
+    }
+
+    @Get()
+    findAll(): Observable<PostEntity[]> {
+        return this.postService.findAll();
     }
 
     // need another for delete
